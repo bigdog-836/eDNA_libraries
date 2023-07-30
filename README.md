@@ -2,7 +2,7 @@
 GJ's pipeline
 conda install cutadapt
 module load cutadapt/4.1-gimkl-2022a-Python-3.10.5
-module load eDNA #loads everything below
+module load eDNA #loads everything below, must load everytime in new windows as well
 Currently Loaded Modules:
   1) XALT/minimal                                   38) Tcl/8.6.10-GCCcore-9.2.0
   2) NeSI                                      (S)  39) Tk/8.6.10-GCCcore-9.2.0
@@ -45,3 +45,11 @@ Currently Loaded Modules:
   Where:
    H:  Hidden Module
 
+#NCBI
+   crabs db_download -s ncbi -db nucleotide -q '12S[All Fields] AND txid7898[Organism:exp] AND mitochondrion[filter]' -o fish_12S_ncbi.fasta -e     
+   ryan.r.easton@gmail.com
+#in silico PCR analysis
+   crabs insilico_pcr -i fish_12S_ncbi.fasta -o fish_12S_ncbi_insilico.fasta -f GTCGGTAAAACTCGTGCCAGC -r CATAGTGGGGTATCTAATCCCAGTTTG
+#assign taxa
+  crabs db_download --source taxonomy
+  crabs assign_tax -i fish_12S_ncbi_insilico.fasta -o fish_12S_ncbi_insilico_tax.tsv -a nucl_gb.accession2taxid -t nodes.dmp -n names.dmp
