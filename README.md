@@ -1,4 +1,5 @@
 # eDNA_libraries
+cp -r 8209-P2-2tol/* # to copy all the folders in a folder
 GJ's pipeline
 conda install cutadapt
 module load cutadapt/4.1-gimkl-2022a-Python-3.10.5
@@ -51,5 +52,10 @@ Currently Loaded Modules:
 #in silico PCR analysis
    crabs insilico_pcr -i fish_12S_ncbi.fasta -o fish_12S_ncbi_insilico.fasta -f GTCGGTAAAACTCGTGCCAGC -r CATAGTGGGGTATCTAATCCCAGTTTG
 #assign taxa
-  crabs db_download --source taxonomy
+  crabs db_download --source taxonomy #use gunzip to unzip file
   crabs assign_tax -i fish_12S_ncbi_insilico.fasta -o fish_12S_ncbi_insilico_tax.tsv -a nucl_gb.accession2taxid -t nodes.dmp -n names.dmp
+#dereplicate
+  crabs dereplicate -i fish_12S_ncbi_insilico_tax.tsv -o fish_12S_ncbi_insilico_tax_derep.tsv -m uniq_species
+  crabs seq_cleanup -i fish_12S_ncbi_insilico_tax_derep.tsv -o fish_12S_ncbi_insilico_tax_derep_clean.tsv -e yes -s yes -na 0
+#export reference database
+  crabs tax_format -i fish_12S_ncbi_insilico_tax_derep_clean.tsv -o fish_12S_ncbi_insilico_tax_derep_clean_sintax.fasta -f sintax
