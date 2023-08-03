@@ -60,9 +60,19 @@ crabs insilico_pcr -i fish_12S_ncbi.fasta -o fish_12S_ncbi_insilico.fasta -f GTC
 
 **#Assign taxonomy**
 crabs db_download --source taxonomy
+crabs assign_tax -i fish_12S_ncbi_insilico.fasta -o fish_12S_ncbi_insilico_tax.tsv -a nucl_gb.accession2taxid -t nodes.dmp -n names.dmp
+crabs assign_tax --input pcr_12s_fish.fasta --output pcr_12s_fish.tsv --acc2tax nucl_gb.accession2taxid --taxid nodes.dmp --name names.dmp --missing missing_pcr_12s_fish.tsv
 
 **#db_merge**
 crabs db_merge --output merged_total.fasta --uniq no --input mitofish.fasta fish_12S_ncbi.fasta bold_fish_lamprey.fasta embl_vrt.fasta
 
 **#insilico_pcr** **(Table 1 https://onlinelibrary-wiley-com.ezproxy.otago.ac.nz/doi/pdf/10.1002/ece3.7658)**
-crabs insilico_pcr --input merged_total.fasta --output pcr_12s_fish.fasta --fwd GTCGGTAAAACTCGTGCCAGC --rev CAAACTGGGATTAGATACCCCACTATG --error 4.5
+crabs insilico_pcr --input merged_total.fasta --output pcr_12s_fish.fasta --fwd GTCGGTAAAACTCGTGCCAGC --rev CATAGTGGGGTATCTAATCCCAGTTTG --error 4.5
+
+**dereplicate**
+crabs dereplicate --input Cytb_Tania.tsv --output Derep_Cytb_Tania.tsv --method uniq_species
+crabs dereplicate -i pcr_12s_fish.tsv -o pcr_12s_fish_insilico_tax_derep.tsv -m uniq_species
+
+**seq_cleanup**
+crabs seq_cleanup --input input.tsv --output output.tsv --minlen 100 --maxlen 500 --maxns 0 --enviro yes --species yes --nans 0
+crabs seq_cleanup -i sharks_16S_ncbi_insilico_tax_derep.tsv -o sharks_16S_ncbi_insilico_tax_derep_clean.tsv -e yes -s yes -na 0
