@@ -64,5 +64,5 @@ crabs db_download --source taxonomy
 **#db_merge**
 crabs db_merge --output merged_total.fasta --uniq no --input mitofish.fasta fish_12S_ncbi.fasta bold_fish_lamprey.fasta embl_vrt.fasta
 
-**#insilico_pcr **(Table 1 https://onlinelibrary-wiley-com.ezproxy.otago.ac.nz/doi/pdf/10.1002/ece3.7658)
+**#insilico_pcr** **(Table 1 https://onlinelibrary-wiley-com.ezproxy.otago.ac.nz/doi/pdf/10.1002/ece3.7658)**
 crabs insilico_pcr --input merged_total.fasta --output pcr_12s_fish.fasta --fwd GTCGGTAAAACTCGTGCCAGC --rev CAAACTGGGATTAGATACCCCACTATG --error 4.5
