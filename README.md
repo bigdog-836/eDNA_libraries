@@ -44,25 +44,25 @@ Currently Loaded Modules:
   Where:
    H:  Hidden Module
 #./demux > demuxoutput.txt #will save output of demux
-#NCBI
+**#NCBI**
    crabs db_download -s ncbi -db nucleotide -q '12S[All Fields] AND txid7898[Organism:exp] AND mitochondrion[filter]' -o fish_12S_ncbi.fasta -e     
    ryan.r.easton@gmail.com
-#in silico PCR analysis
-   crabs insilico_pcr -i fish_12S_ncbi.fasta -o fish_12S_ncbi_insilico.fasta -f GTCGGTAAAACTCGTGCCAGC -r CATAGTGGGGTATCTAATCCCAGTTTG
-#assign taxa
+**#in silico PCR analysis**
+crabs insilico_pcr -i fish_12S_ncbi.fasta -o fish_12S_ncbi_insilico.fasta -f GTCGGTAAAACTCGTGCCAGC -r CATAGTGGGGTATCTAATCCCAGTTTG
+**#assign taxa****
   crabs db_download --source taxonomy #use gunzip to unzip file
   crabs assign_tax -i fish_12S_ncbi_insilico.fasta -o fish_12S_ncbi_insilico_tax.tsv -a nucl_gb.accession2taxid -t nodes.dmp -n names.dmp
-#dereplicate
+**#dereplicate**
   crabs dereplicate -i fish_12S_ncbi_insilico_tax.tsv -o fish_12S_ncbi_insilico_tax_derep.tsv -m uniq_species
   crabs seq_cleanup -i fish_12S_ncbi_insilico_tax_derep.tsv -o fish_12S_ncbi_insilico_tax_derep_clean.tsv -e yes -s yes -na 0
-#export reference database
+**#export reference database**
   crabs tax_format -i fish_12S_ncbi_insilico_tax_derep_clean.tsv -o fish_12S_ncbi_insilico_tax_derep_clean_sintax.fasta -f sintax
 
-#Assign taxonomy
+**#Assign taxonomy**
 crabs db_download --source taxonomy
 
-#db_merge
+**#db_merge**
 crabs db_merge --output merged_total.fasta --uniq no --input mitofish.fasta fish_12S_ncbi.fasta bold_fish_lamprey.fasta embl_vrt.fasta
 
-#insilico_pcr (Table 1 https://onlinelibrary-wiley-com.ezproxy.otago.ac.nz/doi/pdf/10.1002/ece3.7658)
+**#insilico_pcr **(Table 1 https://onlinelibrary-wiley-com.ezproxy.otago.ac.nz/doi/pdf/10.1002/ece3.7658)
 crabs insilico_pcr --input merged_total.fasta --output pcr_12s_fish.fasta --fwd GTCGGTAAAACTCGTGCCAGC --rev CAAACTGGGATTAGATACCCCACTATG --error 4.5
