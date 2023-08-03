@@ -78,4 +78,4 @@ crabs seq_cleanup --input input.tsv --output output.tsv --minlen 100 --maxlen 50
 crabs seq_cleanup -i pcr_12s_fish_insilico_tax_derep.tsv -o pcr_12s_fish_insilico_tax_derep_clean.tsv -e yes -s yes -na 0
 
 **Export**
-crabs tax_format -i sharks_16S_ncbi_insilico_tax_derep_clean.tsv -o sharks_16S_ncbi_insilico_tax_derep_clean_sintax.fasta -f sintax
+crabs tax_format -i pcr_12s_fish_insilico_tax_derep_clean.tsv -o pcr_12s_fish_insilico_tax_derep_clean_sintax.fasta -f sintax
