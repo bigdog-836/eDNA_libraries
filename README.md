@@ -79,3 +79,6 @@ crabs seq_cleanup -i pcr_12s_fish_insilico_tax_derep.tsv -o pcr_12s_fish_insilic
 
 **Export**
 crabs tax_format -i pcr_12s_fish_insilico_tax_derep_clean.tsv -o pcr_12s_fish_insilico_tax_derep_clean_sintax.fasta -f sintax
+
+**To zip and download a folder**
+zip -r 8209-P1-sub1.zip 8209-P1-sub1/
