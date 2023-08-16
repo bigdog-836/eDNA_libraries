@@ -69,6 +69,9 @@ crabs db_merge --output merged_total.fasta --uniq no --input mitofish.fasta fish
 **#insilico_pcr** **(Table 1 https://onlinelibrary-wiley-com.ezproxy.otago.ac.nz/doi/pdf/10.1002/ece3.7658)**
 crabs insilico_pcr --input merged_total.fasta --output pcr_12s_fish.fasta --fwd GTCGGTAAAACTCGTGCCAGC --rev CATAGTGGGGTATCTAATCCCAGTTTG --error 4.5
 
+**pga**
+crabs pga --input merged_total.fasta --database pcr_12s_fish.fasta --output pga_12s_fish.fasta --fwd GTCGGTAAAACTCGTGCCAGC --rev CATAGTGGGGTATCTAATCCCAGTTTG --speed medium --percid 0.95 --coverage 0.95 --filter_method relaxed
+
 **dereplicate**
 crabs dereplicate --input Cytb_Tania.tsv --output Derep_Cytb_Tania.tsv --method uniq_species
 crabs dereplicate -i pcr_12s_fish.tsv -o pcr_12s_fish_insilico_tax_derep.tsv -m uniq_species
